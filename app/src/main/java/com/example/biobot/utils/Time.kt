@@ -10,10 +10,10 @@ class Time {
         fun timeStamp(): String {
 
             val timeStamp = Timestamp(System.currentTimeMillis())
-            val sdf = SimpleDateFormat("HH:mm")
-            val time = sdf.format(Date(timeStamp.time))
+//            val sdf = SimpleDateFormat("HH:mm")
+//            val time = sdf.format(Date(timeStamp.time))
 
-            return time.toString()
+            return timeStamp.toString()
         }
     }
 }

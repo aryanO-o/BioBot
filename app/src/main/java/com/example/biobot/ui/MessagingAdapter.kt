@@ -63,4 +63,9 @@ class MessagingAdapter: RecyclerView.Adapter<MessagingAdapter.MessageViewHolder>
         notifyItemInserted(messagesList.size)
     }
 
+    fun clearMessages() {
+        messagesList.clear()
+        notifyDataSetChanged()
+    }
+
 }
