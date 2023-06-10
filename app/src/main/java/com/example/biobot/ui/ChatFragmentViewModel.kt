@@ -17,7 +17,8 @@ class ChatFragmentViewModel(private val dao: MessageDao) : ViewModel() {
     private val viewModelJob = Job()
     val uiScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    fun addMessages(owner: LifecycleOwner, adapter: MessagingAdapter) {
+    fun addMessages(owner: LifecycleOwner, adapter: MessagingAdapter): Int {
+        var cnt = 0
         dao.getAllMessages().observe(owner, { messages ->
             messages?.let {
                 adapter.clearMessages()
@@ -31,12 +32,14 @@ class ChatFragmentViewModel(private val dao: MessageDao) : ViewModel() {
                             )
                             withContext(Dispatchers.Main) {
                                 adapter.insertMessage(message)
+                                cnt++
                             }
                         }
                     }
                 }
             }
         })
+        return cnt
     }
 
 

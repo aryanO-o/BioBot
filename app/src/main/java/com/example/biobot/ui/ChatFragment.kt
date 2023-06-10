@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -57,7 +58,7 @@ class ChatFragment : Fragment(), LifecycleOwner {
 
         recyclerView()
         clickEvent()
-        firstMessage("Hello I am BioBot, How can I help you today?")
+        loadPreviousMessages()
 
         // Inflate the layout for this fragment
         return binding.root
@@ -115,7 +116,9 @@ class ChatFragment : Fragment(), LifecycleOwner {
         adapter = MessagingAdapter()
         binding.rvMessages.adapter = adapter
         binding.rvMessages.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-        binding.viewModel!!.addMessages(this, adapter)
+
+        firstMessage("Hello I am BioBot, How can I help you today?")
+
     }
 
     private fun firstMessage(msg: String){
@@ -154,6 +157,22 @@ class ChatFragment : Fragment(), LifecycleOwner {
             dialog.dismiss()
             binding.viewModel?.deleteMessages()
             requireActivity().finish()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun loadPreviousMessages() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Save Conversation")
+        builder.setMessage("Do you want to load the saved conversation?")
+        builder.setPositiveButton("Yes") { dialog, _ ->
+            binding.viewModel?.addMessages(this, adapter)
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+            binding.viewModel?.deleteMessages()
         }
         val dialog = builder.create()
         dialog.show()

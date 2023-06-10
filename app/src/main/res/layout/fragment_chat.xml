@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#E4E4E4"
+            android:background="#03A9F4"
             android:orientation="horizontal">
 
             <EditText
@@ -47,7 +47,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_weight="3.5"
                 android:background="@drawable/send_icon"
-                android:backgroundTint="#26A69A"
+                android:backgroundTint="#ffffff"
                 android:text="Send"
                 android:textColor="@color/black" />
 
@@ -58,14 +58,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/ll_layout_bar"
-            android:layout_below="@+id/dark_divider"
-            tools:itemCount="20"
+            android:background="@color/white"
+            android:paddingTop="5dp"
             tools:listitem="@layout/message_item" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="#42A5F5"
-            android:id="@+id/dark_divider"/>
+
 
 
     </RelativeLayout>
